@@ -331,6 +331,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@drdgvhbh/postgres-error-codes@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@drdgvhbh/postgres-error-codes/-/postgres-error-codes-0.0.6.tgz#ff1c6258771894c5c7662495531c38b46e1cc037"
+  integrity sha512-tAz0Xp+qhq90x0r/3VW96iRdHFw72cYQqXa65u0eFVhSMC27bc2gZ8Ky5WXEmshrl/bCe7QTYBNEF0U5zeSQjw==
+
 "@eslint/eslintrc@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.2.2.tgz#d01fc791e2fc33e88a29d6f3dc7e93d0cd784b76"
