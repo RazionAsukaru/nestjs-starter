@@ -1,4 +1,4 @@
-CREATE DATABASE jarko
+CREATE DATABASE nest
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'

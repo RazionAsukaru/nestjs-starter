@@ -15,7 +15,7 @@ $ yarn install
 
 ## Installing Database with docker-compose
 ``` bash
-$ docker-compose -f ./docker/docker-compose.yml -p jarko up -d 
+$ docker-compose -f ./docker-compose.yml -p nest up -d 
 ```
 
 ## Running the app
