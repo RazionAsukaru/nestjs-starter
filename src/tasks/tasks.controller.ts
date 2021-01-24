@@ -1,4 +1,18 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    ParseIntPipe,
+    Patch,
+    Post,
+    Query,
+    UseGuards,
+    UsePipes,
+    ValidationPipe,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { DeleteResult } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
@@ -8,9 +22,9 @@ import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')
+@UseGuards(AuthGuard)
 export class TasksController {
-
-    constructor(private tasksService: TasksService) { }
+    constructor(private tasksService: TasksService) {}
 
     @Get(':id')
     getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
@@ -34,7 +48,11 @@ export class TasksController {
     }
 
     @Patch(':id')
-    updateTask(@Param('id', ParseIntPipe) id: number, @Body('title') title: string, @Body('description') description: string): Promise<Task> {
+    updateTask(
+        @Param('id', ParseIntPipe) id: number,
+        @Body('title') title: string,
+        @Body('description') description: string
+    ): Promise<Task> {
         return this.tasksService.updateTask(id, title, description);
     }
 
