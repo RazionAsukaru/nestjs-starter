@@ -13,7 +13,7 @@ import {
     ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decoretor';
+import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/user/user.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
