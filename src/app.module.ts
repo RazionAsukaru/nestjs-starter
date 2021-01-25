@@ -6,11 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [
-    TasksModule,
-    TypeOrmModule.forRoot(typeOrmConfig),
-    AuthModule,
-    UserModule
-  ],
+    imports: [TasksModule, TypeOrmModule.forRoot(typeOrmConfig), AuthModule, UserModule],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,11 +1,11 @@
 {
-    "recommendations": [
-        "coenraads.bracket-pair-colorizer-2",
-        "pkief.material-icon-theme",
-        "ashinzekene.nestjs",
-        "gruntfuggly.todo-tree",
-        "visualstudioexptteam.vscodeintellicode",
-        "alexanderte.dainty-vscode",
-        "esbenp.prettier-vscode"
-    ]
+  "recommendations": [
+    "coenraads.bracket-pair-colorizer-2",
+    "pkief.material-icon-theme",
+    "ashinzekene.nestjs",
+    "gruntfuggly.todo-tree",
+    "visualstudioexptteam.vscodeintellicode",
+    "alexanderte.dainty-vscode",
+    "esbenp.prettier-vscode"
+  ]
 }
