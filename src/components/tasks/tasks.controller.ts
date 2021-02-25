@@ -13,14 +13,14 @@ import {
     ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/user/user.entity';
+import { GetUser } from '@components/auth/get-user.decorator';
+import { User } from '@entities/user.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { TaskStatus } from './task-status.enum';
-import { Task } from './task.entity';
+import { Task } from '@entities/task.entity';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')

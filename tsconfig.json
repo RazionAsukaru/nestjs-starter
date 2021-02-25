@@ -10,6 +10,19 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@filters/*": ["./src/filters/*"],
+      "@guards/*": ["./src/guards/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@shared/*": ["./@components/shared/*"],
+      "@components/*": ["./@components/*"],
+      "@pipes/*": ["./src/pipes/*"],
+      "@dto/*": ["./src/dto/*"],
+      "@responses/*": ["./src/responses/*"],
+      "@interceptors/*": ["./src/interceptors/*"],
+      "@decorators/*": ["./src/decorators/*"],
+      "@entities/*": ["./src/entities/*"]
+    }
   }
 }
