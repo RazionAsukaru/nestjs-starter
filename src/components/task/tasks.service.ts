@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '@entities/user.entity';
+import { User } from '@entities/.';
 import { DeleteResult } from 'typeorm';
 import { v1 as uuid } from 'uuid';
 import { CreateTaskDto, GetTasksFilterDto } from '@dto/.';
-import { TaskStatus } from '../../enum/task-status.enum';
-import { Task } from '@entities/task.entity';
+import { TaskStatus } from '@enum/task-status.enum';
+import { Task } from '@entities/.';
 import { TaskRepository } from './task.repository';
 
 @Injectable()

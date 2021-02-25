@@ -2,7 +2,7 @@ import { ConflictException, InternalServerErrorException } from '@nestjs/common'
 import { AuthCredentialDto } from '@dto/.';
 import { EntityRepository, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { User } from '@entities/user.entity';
+import { User } from '@entities/.';
 import { PG_UNIQUE_VIOLATION } from '@drdgvhbh/postgres-error-codes';
 
 @EntityRepository(User)

@@ -14,12 +14,12 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '@components/auth/get-user.decorator';
-import { User } from '@entities/user.entity';
+import { User } from '@entities/.';
 import { DeleteResult } from 'typeorm';
 import { CreateTaskDto, GetTasksFilterDto } from '@dto/.';
 import { TaskStatusValidationPipe } from '../../pipes/task-status-validation.pipe';
-import { TaskStatus } from '../../enum/task-status.enum';
-import { Task } from '@entities/task.entity';
+import { TaskStatus } from '@enum/task-status.enum';
+import { Task } from '@entities/.';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')
