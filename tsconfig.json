@@ -16,7 +16,7 @@
       "@guards/*": ["./src/guards/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@shared/*": ["./@components/shared/*"],
-      "@components/*": ["./@components/*"],
+      "@components/*": ["./src/components/*"],
       "@pipes/*": ["./src/pipes/*"],
       "@dto/*": ["./src/dto/*"],
       "@responses/*": ["./src/responses/*"],
