@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmConfig } from './config/type.orm.config';
-import { TasksModule } from './tasks/tasks.module';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { TasksModule } from './components/tasks/tasks.module';
+import { AuthModule } from './components/auth/auth.module';
+import { UserModule } from './components/user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-    imports: [TasksModule, TypeOrmModule.forRoot(typeOrmConfig), AuthModule, UserModule],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
+        TypeOrmModule.forRoot(),
+        TasksModule,
+        AuthModule,
+        UserModule,
+    ],
 })
 export class AppModule {}

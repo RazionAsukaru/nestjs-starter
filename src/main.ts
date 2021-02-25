@@ -7,16 +7,16 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     const globalPrefix = 'api';
     app.setGlobalPrefix(globalPrefix);
-    const port = process.env.PORT || 3333;
+    const port = process.env.SERVER_PORT || 3333;
 
-    // const options = new DocumentBuilder()
-    //     .setTitle('Cats example')
-    //     .setDescription('The cats API description')
-    //     .setVersion('1.0')
-    //     // .addTag('cats')
-    //     .build();
-    // const document = SwaggerModule.createDocument(app, options);
-    // SwaggerModule.setup('api', app, document);
+    const options = new DocumentBuilder()
+        .setTitle('Api v1')
+        .setDescription('Nestjs Starter API')
+        .setVersion('1.0')
+        .addBearerAuth({ in: 'header', type: 'http' })
+        .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('docs', app, document);
 
     await app.listen(port, () => {
         Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
