@@ -3,9 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@entities/user.entity';
 import { DeleteResult } from 'typeorm';
 import { v1 as uuid } from 'uuid';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
-import { TaskStatus } from './task-status.enum';
+import { CreateTaskDto, GetTasksFilterDto } from '@dto/.';
+import { TaskStatus } from '../../enum/task-status.enum';
 import { Task } from '@entities/task.entity';
 import { TaskRepository } from './task.repository';
 

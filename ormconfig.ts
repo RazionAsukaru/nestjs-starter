@@ -6,6 +6,6 @@ module.exports = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: [__dirname + '/dist/**/**/*.entity.{js,ts}'],
+    entities: [__dirname + '/dist/src/entities/*.entity.{js,ts}'],
     synchronize: true,
 }

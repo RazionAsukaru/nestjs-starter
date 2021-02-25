@@ -1,4 +1,4 @@
-import { TaskStatus } from '@components/tasks/task-status.enum';
+import { TaskStatus } from '@enum/.';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from '@entities/user.entity';
 
