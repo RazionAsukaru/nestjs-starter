@@ -26,8 +26,6 @@ export class AuthService {
         const accessToken = await this.jwtService.sign(payload);
 
         return { accessToken };
-
-        console.log('🚀 ~ file: auth.service.ts ~ line 19 ~ AuthService ~ signIn ~ result', username);
-        // return this.userRepository.signUp(authCredentialDto);
+        
     }
 }
