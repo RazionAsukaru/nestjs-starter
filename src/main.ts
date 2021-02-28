@@ -10,7 +10,7 @@ async function bootstrap() {
     app.setGlobalPrefix(globalPrefix);
 
     const configService = app.get(ConfigService);
-    const port = configService.get('SERVER_PORT') || 3333;
+    const port = configService.get<number>('SERVER_PORT') || 3333;
 
     const options = new DocumentBuilder()
         .setTitle('Api v1')

@@ -21,14 +21,20 @@ import { TaskStatusValidationPipe } from '../../pipes/task-status-validation.pip
 import { TaskStatus } from '@enum/task-status.enum';
 import { Task } from '@entities/.';
 import { TasksService } from './tasks.service';
+import { ApiBody, ApiQuery, ApiBearerAuth, ApiTags, ApiParam } from '@nestjs/swagger';
 
+@ApiTags('Task')
 @Controller('tasks')
 @UseGuards(AuthGuard())
+@ApiBearerAuth()
 export class TasksController {
     constructor(private tasksService: TasksService) {}
 
+    @ApiQuery({type: GetTasksFilterDto})
     @Get()
     getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto, @GetUser() user: User): Promise<Task[]> {
+        console.log({filterDto, user});
+        
         return this.tasksService.getTasks(filterDto, user);
     }
 
