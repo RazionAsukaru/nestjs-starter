@@ -16,14 +16,16 @@ export class AuthController {
     }
 
     @Post('/signin')
-    signIn(@Body(ValidationPipe) authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string, refreshToken: string }> {
+    signIn(
+        @Body(ValidationPipe) authCredentialDto: AuthCredentialDto
+    ): Promise<{ accessToken: string; refreshToken: string }> {
         return this.authService.signIn(authCredentialDto);
     }
 
     @Post('/')
     @UseGuards(AuthGuard())
     me() {
-        return 'hello'
+        return 'hello';
     }
     // @Get('verify/:token')
     // async verifyUser(@Param('token') token: string): Promise<any | never> {

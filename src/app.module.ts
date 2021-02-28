@@ -13,17 +13,17 @@ import { RedisModule } from 'nestjs-redis';
         }),
         TypeOrmModule.forRoot(),
         RedisModule.register({
-          url: process.env.REDIS_URL,
-          onClientReady: async (client): Promise<void> => {
-            client.on('error', console.error);
-            client.on('ready', () => {
-              Logger.log('redis is running on 6379 port');
-            });
-            client.on('restart', () => {
-              Logger.log('attempt to restart the redis server');
-            });
-          },
-          reconnectOnError: (): boolean => true,
+            url: process.env.REDIS_URL,
+            onClientReady: async (client): Promise<void> => {
+                client.on('error', console.error);
+                client.on('ready', () => {
+                    Logger.log('redis is running on 6379 port');
+                });
+                client.on('restart', () => {
+                    Logger.log('attempt to restart the redis server');
+                });
+            },
+            reconnectOnError: (): boolean => true,
         }),
         TasksModule,
         AuthModule,

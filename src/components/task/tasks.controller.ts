@@ -30,11 +30,11 @@ import { ApiBody, ApiQuery, ApiBearerAuth, ApiTags, ApiParam } from '@nestjs/swa
 export class TasksController {
     constructor(private tasksService: TasksService) {}
 
-    @ApiQuery({type: GetTasksFilterDto})
+    @ApiQuery({ type: GetTasksFilterDto })
     @Get()
     getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto, @GetUser() user: User): Promise<Task[]> {
-        console.log({filterDto, user});
-        
+        console.log({ filterDto, user });
+
         return this.tasksService.getTasks(filterDto, user);
     }
 

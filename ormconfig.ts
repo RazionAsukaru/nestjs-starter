@@ -7,4 +7,4 @@ module.exports = {
     database: process.env.DB_DATABASE,
     entities: [__dirname + '/dist/src/entities/*.entity.{js,ts}'],
     synchronize: true,
-}
+};

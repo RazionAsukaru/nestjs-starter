@@ -1,11 +1,9 @@
-import { ConfigService } from "@nestjs/config";
+import { ConfigService } from '@nestjs/config';
 
 class config {
-    constructor(private configService:ConfigService){}
-
-    
+    constructor(private configService: ConfigService) {}
 }
 
 const c = new ConfigService();
 
-export const data= new config(c);
+export const data = new config(c);

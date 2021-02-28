@@ -20,7 +20,7 @@ export class AuthService {
         return this.userRepository.signUp(authCredentialDto);
     }
 
-    async signIn(authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string, refreshToken: string }> {
+    async signIn(authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string; refreshToken: string }> {
         const username = await this.userRepository.validateUserPassword(authCredentialDto);
         if (!username) {
             throw new UnauthorizedException('Invalid credentials');
@@ -56,6 +56,6 @@ export class AuthService {
     }
 
     async verifyEmailVerToken(token: string, secret: string) {
-    return this.jwtService.verifyAsync(token, { secret });
-  }
+        return this.jwtService.verifyAsync(token, { secret });
+    }
 }
