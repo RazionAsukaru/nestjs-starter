@@ -14,19 +14,6 @@ import AuthRedisRepository from './auth-redis.repository';
     imports: [
         TypeOrmModule.forFeature([UserRepository]),
         JwtModule.register({}),
-        // JwtModule.registerAsync({
-        //     imports: [ConfigModule],
-        //     inject: [ConfigService],
-        //     useFactory: async (configService: ConfigService) => {
-        //         console.log('auth module:'+ configService.get<number>('JWT_SECRET'));
-
-        //         return {
-        //         secret: '095d402a6944aca7d8d3e08fd78177eb215c38b1e60eeadc04bffd538ba8108b',
-        //         signOptions: {
-        //             expiresIn: configService.get<number>('JWT_ACCESS_EXP'),
-        //         },
-        //     }},
-        // }),
         PassportModule.register({ defaultStrategy: 'jwt' }),
     ],
     controllers: [AuthController],

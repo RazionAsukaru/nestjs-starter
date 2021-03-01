@@ -1,9 +1,10 @@
-import { TaskStatus } from '@enum/.';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { User } from '@entities/.';
+import { ITask } from '@models/task.model';
+import { TaskStatus } from '@enum/task-status.enum';
+import { User } from './user.entity';
 
 @Entity()
-export class Task extends BaseEntity {
+export class Task extends BaseEntity implements ITask {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -11,7 +12,7 @@ export class Task extends BaseEntity {
     title: string;
 
     @Column()
-    description: string;
+    description?: string;
 
     @Column()
     status: TaskStatus;

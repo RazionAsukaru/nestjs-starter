@@ -1,5 +1,5 @@
 import { IsOptional, IsIn, IsNotEmpty } from 'class-validator';
-import { TaskStatus } from '@enum/.';
+import { TaskStatus } from '@enum/task-status.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class GetTasksFilterDto {

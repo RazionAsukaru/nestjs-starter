@@ -2,9 +2,9 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '@components/user/user.repository';
-import { AuthCredentialDto } from '@dto/.';
 import { ConfigService } from '@nestjs/config';
 import AuthRedisRepository from './auth-redis.repository';
+import { SignInDto } from '@dto/auth';
 
 @Injectable()
 export class AuthService {
@@ -16,12 +16,12 @@ export class AuthService {
         private configService: ConfigService
     ) {}
 
-    async signUp(authCredentialDto: AuthCredentialDto): Promise<void> {
+    async signUp(authCredentialDto: SignInDto): Promise<void> {
         return this.userRepository.signUp(authCredentialDto);
     }
 
-    async signIn(authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string; refreshToken: string }> {
-        const username = await this.userRepository.validateUserPassword(authCredentialDto);
+    async signIn(authCredentialDto: SignInDto): Promise<{ accessToken: string; refreshToken: string }> {
+        const { id, username } = await this.userRepository.validateUserPassword(authCredentialDto);
         if (!username) {
             throw new UnauthorizedException('Invalid credentials');
         }
@@ -38,7 +38,7 @@ export class AuthService {
             secret: this.configService.get('JWT_REFRESH'),
         });
 
-        // await this.authRepository.addRefreshToken(payload.username, refreshToken);
+        await this.authRedisRepository.addRefreshToken(payload.username, refreshToken);
 
         return { accessToken, refreshToken };
     }

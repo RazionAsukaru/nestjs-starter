@@ -23,7 +23,9 @@
       "@interceptors/*": ["./src/interceptors/*"],
       "@decorators/*": ["./src/decorators/*"],
       "@entities/*": ["./src/entities/*"],
-      "@enum/*": ["./src/enum/*"]
+      "@enum/*": ["./src/enum/*"],
+      "@models/*": ["./src/models/*"],
+      "@constants/*": ["./src/constants/*"]
     }
   }
 }

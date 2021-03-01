@@ -1,13 +1,13 @@
 import { ConflictException, InternalServerErrorException } from '@nestjs/common';
-import { AuthCredentialDto } from '@dto/.';
+import { SignInDto } from '@dto/auth';
 import { EntityRepository, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { User } from '@entities/.';
+import { User } from '@entities/user.entity';
 import { PG_UNIQUE_VIOLATION } from '@drdgvhbh/postgres-error-codes';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-    async signUp(authCredentialDto: AuthCredentialDto): Promise<void> {
+    async signUp(authCredentialDto: SignInDto): Promise<void> {
         const { username, password } = authCredentialDto;
 
         const user = new User();
@@ -30,12 +30,12 @@ export class UserRepository extends Repository<User> {
         return bcrypt.hash(password, salt);
     }
 
-    async validateUserPassword(authCredentialDto: AuthCredentialDto): Promise<string> {
+    async validateUserPassword(authCredentialDto: SignInDto): Promise<User> {
         const { username, password } = authCredentialDto;
         const user = await this.findOne({ username });
 
         if (user && (await user.validatePassword(password))) {
-            return user.username;
+            return user;
         } else {
             return null;
         }
