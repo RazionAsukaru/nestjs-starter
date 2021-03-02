@@ -1,20 +1,20 @@
 import { CreateUserDto } from '@dto/user';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { IsOptional, IsString, Matches, MaxLength, MinLength } from 'class-validator';
+import {  } from "@dto/user";
 import { IUser } from '@models/user.model';
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
-export class SignUpDto extends CreateUserDto {}
-
-export class SignInDto {
-    @ApiProperty({ type: String, required: false, default: 'admin' }) // default for development only
+export class SignInDto implements IUser {
+    @ApiProperty({
+        type: String,
+        required: false,
+        default: 'admin',
+        minLength: 4,
+        maxLength: 20,
+        description: 'insert username or emailF',
+    }) // default for development only
     @IsString()
-    @IsEmail()
-    email?: string;
-
-    @ApiProperty({ type: String, required: false, default: 'admin', minLength: 4, maxLength: 20 }) // default for development only
-    @IsString()
-    @MinLength(4)
-    @MaxLength(20)
+    @IsOptional()
     username?: string;
 
     @ApiProperty({ type: String, required: false, default: 'Sadev123' }) // default for development only

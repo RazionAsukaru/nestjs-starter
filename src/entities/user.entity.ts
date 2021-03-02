@@ -12,7 +12,7 @@ export class User extends BaseEntity implements IUser {
     @Column({
         unique: true,
     })
-    @IsEmail({})
+    @IsEmail()
     email: string;
 
     @Column({
@@ -29,8 +29,12 @@ export class User extends BaseEntity implements IUser {
     @Column()
     salt: string;
 
+    @Column({default: false})
+    verified?: boolean;
+
     @OneToMany(type => Task, task => task.user, { eager: true })
     tasks: Task[];
+
 
     async validatePassword(password: string): Promise<boolean> {
         const hash = await bcrypt.hash(password, this.salt);

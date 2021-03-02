@@ -5,6 +5,7 @@ import { UserRepository } from '@components/user/user.repository';
 import { ConfigService } from '@nestjs/config';
 import AuthRedisRepository from './auth-redis.repository';
 import { SignInDto } from '@dto/auth';
+import { CreateUserDto } from '@dto/user';
 
 @Injectable()
 export class AuthService {
@@ -16,25 +17,27 @@ export class AuthService {
         private configService: ConfigService
     ) {}
 
-    async signUp(authCredentialDto: SignInDto): Promise<void> {
-        return this.userRepository.signUp(authCredentialDto);
+    async signUp(CreateUserDto: CreateUserDto): Promise<void> {
+        return this.userRepository.signUp(CreateUserDto);
     }
 
-    async signIn(authCredentialDto: SignInDto): Promise<{ accessToken: string; refreshToken: string }> {
-        const { id, username } = await this.userRepository.validateUserPassword(authCredentialDto);
-        if (!username) {
+    async signIn(signInDto: SignInDto): Promise<{ accessToken: string; refreshToken: string }> {
+        const hasil = await this.userRepository.validateUserPassword(signInDto);
+
+        const { id, email, username, name } = hasil;
+        if (!username && !email) {
             throw new UnauthorizedException('Invalid credentials');
         }
 
-        const payload = { username };
+        const payload = { id, email, username, name };
 
         const accessToken = this.jwtService.sign(payload, {
-            expiresIn: Number(this.configService.get('JWT_ACCESS_EXP')),
+            expiresIn: +this.configService.get('JWT_ACCESS_EXP'),
             secret: this.configService.get('JWT_ACCESS_SECRET'),
         });
 
         const refreshToken = this.jwtService.sign(payload, {
-            expiresIn: Number(this.configService.get('JWT_REFRESH_EXP')),
+            expiresIn: +this.configService.get('JWT_REFRESH_EXP'),
             secret: this.configService.get('JWT_REFRESH'),
         });
 

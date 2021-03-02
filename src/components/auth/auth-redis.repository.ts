@@ -12,7 +12,7 @@ export default class AuthRedisRepository {
     }
 
     public async addRefreshToken(email: string, token: string): Promise<void> {
-        await this.redisClient.set(email, token, 'EX', Number(this.configService.get('JWT_REFRESH_EXP')));
+        await this.redisClient.set(email, token, 'EX', +this.configService.get('JWT_REFRESH_EXP'));
     }
 
     public getToken(key: string): Promise<string | null> {

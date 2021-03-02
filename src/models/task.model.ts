@@ -3,9 +3,9 @@ import { IUser } from './user.model';
 
 export interface ITask {
     id?: number;
-    title: string;
+    title?: string;
     description?: string;
-    status: TaskStatus;
-    userId: number;
-    user: IUser;
+    status?: TaskStatus;
+    userId?: number;
+    user?: IUser;
 }
