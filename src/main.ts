@@ -11,17 +11,17 @@ async function bootstrap() {
 
     const configService = app.get(ConfigService);
     const port = configService.get<number>('SERVER_PORT') || 3333;
-
-
-    // Swagger Docs
-    const options = new DocumentBuilder()
-        .setTitle('Api v1')
-        .setDescription('Nestjs Starter API')
-        .setVersion('1.0')
-        .addBearerAuth({ in: 'header', type: 'http' })
-        .build();
-    const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('docs', app, document);
+    if (configService.get<string>('PROD') === 'false' ) {
+        // Swagger Docs
+        const options = new DocumentBuilder()
+            .setTitle('Api v1')
+            .setDescription('Nestjs Starter API')
+            .setVersion('1.0')
+            .addBearerAuth({ in: 'header', type: 'http' })
+            .build();
+        const document = SwaggerModule.createDocument(app, options);
+        SwaggerModule.setup('docs', app, document);
+    }
 
     await app.listen(port, () => {
         Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
