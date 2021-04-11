@@ -2,32 +2,63 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '@components/user/user.repository';
-import { AuthCredentialDto } from './dto/auth.credentials.dto';
+import { ConfigService } from '@nestjs/config';
+// import AuthRedisRepository from './auth-redis.repository';
+import { SignInDto } from '@dto/auth';
+import { CreateUserDto } from '@dto/user';
 
 @Injectable()
 export class AuthService {
     constructor(
         @InjectRepository(UserRepository)
         private userRepository: UserRepository,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        // private authRedisRepository: AuthRedisRepository,
+        private configService: ConfigService
     ) {}
 
-    async signUp(authCredentialDto: AuthCredentialDto): Promise<void> {
-        return this.userRepository.signUp(authCredentialDto);
+    async signUp(CreateUserDto: CreateUserDto): Promise<void> {
+        return this.userRepository.signUp(CreateUserDto);
     }
 
-    async signIn(authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string }> {
-        const username = await this.userRepository.validateUserPassword(authCredentialDto);
-        if (!username) {
+    async signIn(signInDto: SignInDto): Promise<{ accessToken: string; refreshToken: string }> {
+        const hasil = await this.userRepository.validateUserPassword(signInDto);
+
+        const { id, email, username, name } = hasil;
+        if (!username && !email) {
             throw new UnauthorizedException('Invalid credentials');
         }
 
-        const payload = { username };
-        const accessToken = await this.jwtService.sign(payload);
+        const payload = { id, email, username, name };
 
-        return { accessToken };
+        const accessToken = this.jwtService.sign(payload, {
+            expiresIn: +this.configService.get('JWT_ACCESS_EXP'),
+            secret: this.configService.get('JWT_ACCESS_SECRET'),
+        });
 
-        console.log('🚀 ~ file: auth.service.ts ~ line 19 ~ AuthService ~ signIn ~ result', username);
-        // return this.userRepository.signUp(authCredentialDto);
+        const refreshToken = this.jwtService.sign(payload, {
+            expiresIn: +this.configService.get('JWT_REFRESH_EXP'),
+            secret: this.configService.get('JWT_REFRESH'),
+        });
+
+        // await this.authRedisRepository.addRefreshToken(payload.username, refreshToken);
+
+        return { accessToken, refreshToken };
+    }
+
+    // async getRefreshTokenByEmail(email: string): Promise<string | null> {
+    //     return this.authRedisRepository.getToken(email);
+    // }
+
+    // async deleteTokenByEmail(email: string): Promise<number> {
+    //     return this.authRedisRepository.removeToken(email);
+    // }
+
+    // async deleteAllTokens(): Promise<string> {
+    //     return this.authRedisRepository.removeAllTokens();
+    // }
+
+    async verifyEmailVerToken(token: string, secret: string) {
+        return this.jwtService.verifyAsync(token, { secret });
     }
 }

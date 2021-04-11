@@ -22,7 +22,10 @@
       "@responses/*": ["./src/responses/*"],
       "@interceptors/*": ["./src/interceptors/*"],
       "@decorators/*": ["./src/decorators/*"],
-      "@entities/*": ["./src/entities/*"]
+      "@entities/*": ["./src/entities/*"],
+      "@enum/*": ["./src/enum/*"],
+      "@models/*": ["./src/models/*"],
+      "@constants/*": ["./src/constants/*"]
     }
   }
 }
