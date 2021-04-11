@@ -5,13 +5,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, { cors: true });
     const globalPrefix = 'api';
     app.setGlobalPrefix(globalPrefix);
 
     const configService = app.get(ConfigService);
     const port = configService.get<number>('SERVER_PORT') || 3333;
 
+
+    // Swagger Docs
     const options = new DocumentBuilder()
         .setTitle('Api v1')
         .setDescription('Nestjs Starter API')

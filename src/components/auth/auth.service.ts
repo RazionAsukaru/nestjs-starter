@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '@components/user/user.repository';
 import { ConfigService } from '@nestjs/config';
-import AuthRedisRepository from './auth-redis.repository';
+// import AuthRedisRepository from './auth-redis.repository';
 import { SignInDto } from '@dto/auth';
 import { CreateUserDto } from '@dto/user';
 
@@ -13,7 +13,7 @@ export class AuthService {
         @InjectRepository(UserRepository)
         private userRepository: UserRepository,
         private jwtService: JwtService,
-        private authRedisRepository: AuthRedisRepository,
+        // private authRedisRepository: AuthRedisRepository,
         private configService: ConfigService
     ) {}
 
@@ -41,22 +41,22 @@ export class AuthService {
             secret: this.configService.get('JWT_REFRESH'),
         });
 
-        await this.authRedisRepository.addRefreshToken(payload.username, refreshToken);
+        // await this.authRedisRepository.addRefreshToken(payload.username, refreshToken);
 
         return { accessToken, refreshToken };
     }
 
-    async getRefreshTokenByEmail(email: string): Promise<string | null> {
-        return this.authRedisRepository.getToken(email);
-    }
+    // async getRefreshTokenByEmail(email: string): Promise<string | null> {
+    //     return this.authRedisRepository.getToken(email);
+    // }
 
-    async deleteTokenByEmail(email: string): Promise<number> {
-        return this.authRedisRepository.removeToken(email);
-    }
+    // async deleteTokenByEmail(email: string): Promise<number> {
+    //     return this.authRedisRepository.removeToken(email);
+    // }
 
-    async deleteAllTokens(): Promise<string> {
-        return this.authRedisRepository.removeAllTokens();
-    }
+    // async deleteAllTokens(): Promise<string> {
+    //     return this.authRedisRepository.removeAllTokens();
+    // }
 
     async verifyEmailVerToken(token: string, secret: string) {
         return this.jwtService.verifyAsync(token, { secret });

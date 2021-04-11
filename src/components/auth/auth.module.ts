@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 // import { JwtAuthGuard } from '@guards/jwt-auth.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import AuthRedisRepository from './auth-redis.repository';
+// import AuthRedisRepository from './auth-redis.repository';
 import { UserService } from '@components/user/user.service';
 
 @Module({
@@ -18,7 +18,7 @@ import { UserService } from '@components/user/user.service';
         PassportModule.register({ defaultStrategy: 'jwt' }),
     ],
     controllers: [AuthController],
-    providers: [AuthService, JwtStrategy, AuthRedisRepository, UserService],
+    providers: [AuthService, JwtStrategy, /* AuthRedisRepository, */ UserService],
     exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
